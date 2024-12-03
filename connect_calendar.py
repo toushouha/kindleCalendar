@@ -46,6 +46,7 @@ class Calendar:
 
         # get holidays in this month
         holidays_id = 'ja.japanese#holiday@group.v.calendar.google.com'
+
         res = service.events().list(
             calendarId=holidays_id,
             timeMin=time_min,
@@ -59,11 +60,12 @@ class Calendar:
 
         res = service.calendarList().list().execute()
         calendars = [r['id'] for r in res['items']]
-        calendars.remove(holidays_id)
-
+        # calendars.remove(holidays_id)
+        calendars[:] = [cal for cal in calendars if "weather@group.v.calendar.google.com" not in cal]
         all_events = []
         events = []
         for calendar_id in calendars:
+            # print(calendar_id)
             # get all the events in this month
             res = service.events().list(
                 calendarId=calendar_id,
@@ -106,4 +108,4 @@ class Calendar:
 
 if __name__ == '__main__':
     res = Calendar.get_events(date.today())
-    print(res)
+    # print(res)

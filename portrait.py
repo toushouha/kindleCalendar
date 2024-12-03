@@ -27,9 +27,10 @@ def padding_width(width: int, text: str, font_symbol: str, font_size: int):
 
 # for mac only
 font_files = dict(
-    en='/System/Library/Fonts/Optima.ttc',
-    ja='/System/Library/Fonts/ヒラギノ角ゴシック W3.ttc',
-    title='/System/Library/Fonts/Supplemental/Zapfino.ttf'
+    en='./Fonts/Marcellus-Regular.ttf',
+    ja='./Fonts/NotoSansJP-Regular.otf',
+    num='./Fonts/Cardo-Regular.ttf',
+    title='./Fonts/PinyonScript-Regular.ttf'
 )
 # grey scale
 grey = np.arange(0, 255, 256 // 16).tolist()
@@ -105,13 +106,16 @@ for h, event in enumerate(events[:8]):
         + f'{f"  {event[1][1][:5]}" if len(event[1]) != 1 else ""}  {event[0]}'
     draw.multiline_text((30, 480 + 30 * h),
                         text, font=get_font('ja', 20), fill=grey[2])
-    draw.line(
-        ((16, 500 + 30 * h), (SIZE[0] - 16, 500 + 30 * h)), fill=grey[10], width=1)
+    # draw.line(
+    #     ((16, 500 + 30 * h), (SIZE[0] - 16, 500 + 30 * h)), fill=grey[10], width=1)
 
 dt = datetime.now().isoformat(sep=' ')[:16].replace('-', '.')
 draw.multiline_text((10, SIZE[1] - 30), f'Updated at {dt}',
                     font=get_font('en', 16), fill=grey[8])
 
-# to bmp
-file_name = './image_600x800.bmp'
-img.save(file_name, 'bmp')
+# to pic file
+# file_name = './image_600x800.bmp'
+# img.save(file_name, 'bmp')
+# im.save('./output.jpg', 'JPEG' ,quality=95, optimize=True, progressive=True, dpi=im.info.get('dpi'), icc_profile=im.info.get('icc_profile'), exif=im.info.get('exif'), subsampling=-1, qtables='keep')
+file_name = './image_600x800.jpg'
+img.save(file_name, 'JPEG', quality=95, optimize=True, progressive=False)
