@@ -1,8 +1,12 @@
 # google calendar
 credentials.json
 token.pickle
+*.jpg
+*.png
+*.bmp
 
-image*.bmp
+result.json
+*.bmp
 demo*.bmp
 
 .env
